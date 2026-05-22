@@ -1,0 +1,33 @@
+{
+  "name": "atmosai-bot",
+  "version": "1.0.0",
+  "description": "Dialogflow ES weather bot fulfillment webhook (OpenWeatherMap)",
+  "main": "dist/server.js",
+  "scripts": {
+    "dev": "tsx watch src/server.ts",
+    "build": "tsc",
+    "start": "node dist/server.js",
+    "typecheck": "tsc --noEmit"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/owaisrafiq05/AtmosAI-Bot.git"
+  },
+  "keywords": ["dialogflow", "weather", "webhook", "openweathermap"],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "express": "^5.2.1"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.10.0",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2"
+  }
+}
