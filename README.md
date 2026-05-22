@@ -24,7 +24,7 @@ src/
 - Node.js 18+
 - [OpenWeatherMap](https://openweathermap.org/api) API key
 - [Dialogflow ES](https://dialogflow.cloud.google.com/) agent with fulfillment enabled
-- [ngrok](https://ngrok.com/) (or similar) to expose localhost to Dialogflow
+- [Vercel](https://vercel.com/) account for production deployment (or [ngrok](https://ngrok.com/) for local testing)
 
 ## Setup
 
@@ -46,16 +46,36 @@ cp .env.example .env
 npm run dev
 ```
 
-4. Expose with ngrok:
+4. Deploy to Vercel (recommended for Dialogflow webhook URL):
 
 ```bash
-ngrok http 3000
+npm i -g vercel   # optional, if CLI not installed
+vercel            # first deploy — link project, set env vars when prompted
+vercel --prod     # production URL
 ```
+
+In the [Vercel dashboard](https://vercel.com/) → Project → **Settings** → **Environment Variables**, add:
+
+| Variable | Required |
+|----------|----------|
+| `OPENWEATHER_API_KEY` | Yes |
+| `FORECAST_DAYS` | No (default `8`) |
+| `WEATHER_UNITS` | No (default `metric`) |
 
 5. In Dialogflow ES → **Fulfillment** → enable webhook and set URL to:
 
 ```
-https://<your-ngrok-host>/webhook/dialogflow
+https://<your-vercel-domain>/webhook/dialogflow
+```
+
+Example: `https://atmosai-bot.vercel.app/webhook/dialogflow`
+
+**Local testing with ngrok** (optional):
+
+```bash
+npm run dev
+ngrok http 3000
+# Use https://<ngrok-host>/webhook/dialogflow in Dialogflow
 ```
 
 ## Dialogflow configuration (recommended)
@@ -96,7 +116,21 @@ If Dialogflow sends `originalDetectIntentRequest.payload.time`, that value is us
 | `npm start` | Run compiled production build |
 | `npm run typecheck` | Type-check without emit |
 
-## Production build
+## Deploy on Vercel
+
+The repo includes `vercel.json` and `api/index.ts`. All routes are rewritten to a single Express serverless function.
+
+| File | Role |
+|------|------|
+| `vercel.json` | Build, rewrites, function limits |
+| `api/index.ts` | Serverless entry — exports the compiled Express app |
+
+After deploy, verify:
+
+- `GET https://<domain>/webhook/health`
+- `POST https://<domain>/webhook/dialogflow` (Dialogflow fulfillment)
+
+## Production build (Node server)
 
 ```bash
 npm run build
