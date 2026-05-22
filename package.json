@@ -2,11 +2,11 @@
   "name": "atmosai-bot",
   "version": "1.0.0",
   "description": "Dialogflow ES weather bot fulfillment webhook (OpenWeatherMap)",
-  "main": "dist/server.js",
+  "main": "dist/dev-server.js",
   "scripts": {
-    "dev": "tsx watch src/server.ts",
+    "dev": "tsx watch src/dev-server.ts",
     "build": "tsc",
-    "start": "node dist/server.js",
+    "start": "node dist/dev-server.js",
     "typecheck": "tsc --noEmit"
   },
   "repository": {

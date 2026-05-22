@@ -1,11 +1,7 @@
-import { createApp } from "./app";
-import { env, validateEnv } from "./config/env";
+import app from "./app";
+import { env } from "./config/env";
 
 export function startServer(): void {
-  validateEnv();
-
-  const app = createApp();
-
   app.listen(env.port, () => {
     console.log(
       `AtmosAI Weather webhook listening on http://localhost:${env.port}`

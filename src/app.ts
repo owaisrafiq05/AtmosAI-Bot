@@ -1,8 +1,9 @@
 import express from "express";
-import { createRoutes } from "./routes";
+import { validateEnv } from "./config/env";
 import { errorHandler } from "./middleware/errorHandler";
+import { createRoutes } from "./routes";
 
-export function createApp(): express.Application {
+function buildApp(): express.Application {
   const app = express();
 
   app.use(express.json());
@@ -11,3 +12,9 @@ export function createApp(): express.Application {
 
   return app;
 }
+
+validateEnv();
+
+/** Vercel Express entry (see https://vercel.com/docs/frameworks/backend/express) */
+const app = buildApp();
+export = app;

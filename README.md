@@ -6,7 +6,8 @@ REST API fulfillment backend for the **Weather Info & Forecast Bot** evaluation 
 
 ```
 src/
-  server.ts                     # Entry point — starts HTTP server
+  app.ts                        # Express app (default export for Vercel)
+  dev-server.ts                 # Local entry — starts HTTP server
   app.ts                        # Express app factory
   config/env.ts                 # Environment configuration
   controllers/webhook.controller.ts
@@ -118,12 +119,13 @@ If Dialogflow sends `originalDetectIntentRequest.payload.time`, that value is us
 
 ## Deploy on Vercel
 
-The repo includes `vercel.json` and `api/index.ts`. All routes are rewritten to a single Express serverless function.
+Vercel auto-detects Express via `src/app.ts` (default export). Local dev uses `src/dev-server.ts` with `app.listen()`.
 
 | File | Role |
 |------|------|
-| `vercel.json` | Build, rewrites, function limits |
-| `api/index.ts` | Serverless entry — Vercel handler that forwards to Express |
+| `src/app.ts` | Express app — **default export** (Vercel production entry) |
+| `src/dev-server.ts` | Local `npm run dev` / `npm start` |
+| `vercel.json` | Optional build/typecheck step |
 
 After deploy, verify:
 
