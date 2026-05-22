@@ -1,0 +1,19 @@
+{
+  "responseId": "sample-response-id",
+  "session": "projects/sample/agent/sessions/abc123",
+  "queryResult": {
+    "queryText": "What is the forecast for Tokyo?",
+    "parameters": {
+      "city": "Tokyo"
+    },
+    "intent": {
+      "displayName": "weather.forecast"
+    },
+    "languageCode": "en"
+  },
+  "originalDetectIntentRequest": {
+    "payload": {
+      "time": "2026-05-22T10:00:00Z"
+    }
+  }
+}

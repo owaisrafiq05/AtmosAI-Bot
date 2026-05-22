@@ -123,7 +123,7 @@ The repo includes `vercel.json` and `api/index.ts`. All routes are rewritten to 
 | File | Role |
 |------|------|
 | `vercel.json` | Build, rewrites, function limits |
-| `api/index.ts` | Serverless entry — exports the compiled Express app |
+| `api/index.ts` | Serverless entry — Vercel handler that forwards to Express |
 
 After deploy, verify:
 

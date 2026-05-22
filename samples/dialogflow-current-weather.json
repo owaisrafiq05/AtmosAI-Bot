@@ -1,0 +1,19 @@
+{
+  "responseId": "sample-response-id",
+  "session": "projects/sample/agent/sessions/abc123",
+  "queryResult": {
+    "queryText": "What is the weather in London?",
+    "parameters": {
+      "city": "London"
+    },
+    "intent": {
+      "displayName": "weather.current"
+    },
+    "languageCode": "en"
+  },
+  "originalDetectIntentRequest": {
+    "payload": {
+      "time": "2026-05-22T10:00:00Z"
+    }
+  }
+}

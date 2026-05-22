@@ -1,6 +1,20 @@
-import { createApp } from "../dist/app";
-import { validateEnv } from "../dist/config/env";
+import type { IncomingMessage, ServerResponse } from "http";
+import { createApp } from "../src/app";
+import { validateEnv } from "../src/config/env";
 
-validateEnv();
+let app: ReturnType<typeof createApp> | undefined;
 
-export default createApp();
+function getApp(): ReturnType<typeof createApp> {
+  if (!app) {
+    validateEnv();
+    app = createApp();
+  }
+  return app;
+}
+
+export default function handler(
+  req: IncomingMessage,
+  res: ServerResponse
+): void {
+  getApp()(req, res);
+}
